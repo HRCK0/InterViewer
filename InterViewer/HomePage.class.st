@@ -18,6 +18,8 @@ HomePage class >> handlerName [
 
 { #category : #initialization }
 HomePage class >> initialize [
+	WAAdmin applicationDefaults removeParent: WADevelopmentConfiguration instance.
+	WADispatcher default handlers do: [ :each | WADispatcher default unregister: each ].
 	WAAdmin register: self asApplicationAt: self handlerName
 ]
 
@@ -68,19 +70,27 @@ HomePage >> renderContentOn: html [
 					'https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f50d.png';
 				width: '40px';
 				style: 'margin-left: 15px'.
+
+			html form
+				class: 'nav-links';
+				with: [ 
+					html label
+						class: 'searchLabel';
+						with: 'Keywords:'.
+					html textInput
+						class: 'seachInput';
+						on: #keyword of: self.
+					html label
+						class: 'searchLabel';
+						with: 'Locations:'.
+					html textInput
+						class: 'seachInput';
+						on: #location of: self.
+					html submitButton value: 'Search' ].
 			html div
 				class: 'logo';
 				with: [ html anchor with: [ html header: 'iNTERvIEWER' ] ] ].
-	html form
-		class: 'nav-links';
-		with: [ 
-			html label with: 'Keywords:'.
-			html textInput
-				on: #keyword of: self.
-			html label with: 'Locations:'.
-			html textInput
-				on: #location of: self.
-			html submitButton value: 'Search' ].
+
 	html div
 		id: 'wholesite';
 		with: [ 
@@ -187,6 +197,15 @@ HomePage >> style [
     width: 250px;
     margin-bottom: 10px;
   }
+
+   .searchInput { 
+		margin-right: 5px;
+	}
+		
+	.searchLabel { 
+		margin-right: 7px;
+		margin-left: 7px;
+	}
   
   #wholesite {
     padding-left: 3%;

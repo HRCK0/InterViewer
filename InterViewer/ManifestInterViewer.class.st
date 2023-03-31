@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #'code-critics' }
+ManifestInterViewer class >> ruleInconsistentMethodClassificationRuleV1FalsePositive [
+	^ #(#(#(#RGClassDefinition #(#HomePage)) #'2023-04-01T01:21:38.965507+02:00') )
+]
+
+{ #category : #'code-critics' }
 ManifestInterViewer class >> ruleLongMethodsRuleV1FalsePositive [
 	^ #(#(#(#RGClassDefinition #(#HomePage)) #'2023-03-31T15:52:37.484674+02:00') )
 ]

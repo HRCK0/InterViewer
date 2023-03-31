@@ -38,10 +38,10 @@ IVDatabaseManager class >> createDatabase [
 { #category : #generatedatabase }
 IVDatabaseManager class >> createJobsRecords [
 
-	IVJobsMock new generateJobs do: [ :each | 
+	IVJobsMock new demoJobs do: [ :each | 
 		self singleton
 			executeQuery: each insertQuery
-			onError: [ :error | self halt ] ]
+			onError: [ :error |  ] ]
 ]
 
 { #category : #generatedatabase }
