@@ -18,6 +18,9 @@ A component is visible if it:
 Class {
 	#name : #WAComponent,
 	#superclass : #WAPresenter,
+	#instVars : [
+		'decoration'
+	],
 	#category : #InterViewer
 }
 
