@@ -30,5 +30,5 @@ BaselineOfInterViewer >> setUpPackages: spec [
 
 	spec
 		package: 'InterViewer'
-		with: [ spec requires: #( 'Seaside3' 'Mapless' ) ]
+		with: [ spec requires: #( 'Seaside3' 'P3' ) ]
 ]
