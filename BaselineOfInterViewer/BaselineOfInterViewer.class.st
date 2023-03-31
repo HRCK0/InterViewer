@@ -9,9 +9,19 @@ BaselineOfInterViewer >> baseline: spec [
 	<baseline>
 	
 	spec for: #common do: [ 
+		spec postLoadDoIt: #'postload:package:'.
 		self setUpDependences:spec.
 		self setUpPackages: spec.
 ].
+
+]
+
+{ #category : #baselines }
+BaselineOfInterViewer >> postload: loader package: packageSpec [
+	"we need to generate demo database after everything gets loaded"
+	IVDatabaseManager 
+		dropDatabase;
+		generateDatabase
 
 ]
 
