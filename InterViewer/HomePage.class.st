@@ -4,6 +4,10 @@ uOttawa Project
 Class {
 	#name : #HomePage,
 	#superclass : #WAComponent,
+	#instVars : [
+		'keyword',
+		'location'
+	],
 	#category : #InterViewer
 }
 
@@ -20,17 +24,37 @@ HomePage class >> initialize [
 { #category : #initialization }
 HomePage >> featuredJobs [
 
-	^OrderedCollection new
-		add: 1;
-		add: 1;
-				add: 1;
-		yourself
+	^IVJob findAllWhere: self searchConditionDictionary 
 ]
 
 { #category : #initialization }
 HomePage >> initialize [ 
 	super initialize.
 	
+]
+
+{ #category : #accessing }
+HomePage >> keyword [
+
+	^ keyword
+]
+
+{ #category : #accessing }
+HomePage >> keyword: anObject [
+
+	keyword := anObject
+]
+
+{ #category : #accessing }
+HomePage >> location [
+
+	^ location
+]
+
+{ #category : #accessing }
+HomePage >> location: anObject [
+
+	location := anObject
 ]
 
 { #category : #initialization }
@@ -52,12 +76,10 @@ HomePage >> renderContentOn: html [
 		with: [ 
 			html label with: 'Keywords:'.
 			html textInput
-				id: 'keywords';
-				name: 'keywords'.
+				on: #keyword of: self.
 			html label with: 'Locations:'.
 			html textInput
-				id: 'locations';
-				name: 'locations'.
+				on: #location of: self.
 			html submitButton value: 'Search' ].
 	html div
 		id: 'wholesite';
@@ -101,22 +123,22 @@ HomePage >> renderFeaturedJob: eachJob in: html [
 				with: [ 
 					html image
 						url:
-							'https://cdn.freebiesupply.com/images/large/2x/starbucks-logo-png-transparent.png';
-						altText: 'Starbucks Logo';
+							eachJob logo;
+						altText: 'Logo';
 						width: '110px'].
 				html div with: [  
 					html div with: [ 
 						html heading
 							level3;
-							with: [ html text: 'Software Developer' ].
+							with: [ html text: eachJob jobtitle ].
 						html heading
 							level4;
 							with: [ html text: 'Company Name: ' ].
-						html paragraph with: [ html text: 'Starbucks' ].
+						html paragraph with: [ html text: eachJob companyname  ].
 						html heading
 							level4;
 							with: [ html text: 'Location: ' ].
-						html paragraph with: [ html text: 'Ottawa' ] ] ].
+						html paragraph with: [ html text: eachJob location ] ] ].
 			html div with: [ 
 				html heading
 					level4;
@@ -125,10 +147,27 @@ HomePage >> renderFeaturedJob: eachJob in: html [
 					style: 'padding-bottom: 5px;';
 					with: [ 
 						html text:
-								'This job creates the Starbucks Experience for our customers by providing customers with prompt service, quality beverages and products, and maintaining a clean and comfortable store environment. Models and acts in accordance with Starbucks guiding principles.' ] ].
+								eachJob description ] ].
 			html anchor
-				callback: [  ];
+				targetBlank;
+				url: eachJob link;
 				with: 'Apply now']
+]
+
+{ #category : #initialization }
+HomePage >> searchConditionDictionary [ 
+
+	| dict |
+	dict := Dictionary new.
+	self keyword isEmptyOrNil ifFalse: [ 
+		dict at: #description put: self keyword.
+		dict at: #companyname put: self keyword.
+		dict at: #jobtitle put: self keyword  ].
+	
+	self location isEmptyOrNil ifFalse: [ 
+		dict at: #location put: self location ].
+	
+	^dict
 ]
 
 { #category : #initialization }

@@ -13,6 +13,16 @@ ManifestInterViewer class >> ruleLongMethodsRuleV1FalsePositive [
 ]
 
 { #category : #'code-critics' }
+ManifestInterViewer class >> ruleSentNotImplementedRuleV1FalsePositive [
+	^ #(#(#(#RGMethodDefinition #(#'IVJob class' #readQueryWhere: #true)) #'2023-03-31T23:40:26.719513+02:00') )
+]
+
+{ #category : #'code-critics' }
+ManifestInterViewer class >> ruleUnclassifiedMethodsRuleV1FalsePositive [
+	^ #(#(#(#RGClassDefinition #(#IVJobsMock)) #'2023-03-31T21:58:53.048716+02:00') )
+]
+
+{ #category : #'code-critics' }
 ManifestInterViewer class >> ruleUtilityMethodsRuleV1FalsePositive [
 	^ #(#(#(#RGClassDefinition #(#HomePage)) #'2023-03-31T15:42:59.97226+02:00') )
 ]
