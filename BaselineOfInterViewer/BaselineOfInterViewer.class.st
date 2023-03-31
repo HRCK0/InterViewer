@@ -20,11 +20,9 @@ BaselineOfInterViewer >> setUpDependences: spec [
 
 	spec
 		baseline: 'Seaside3'
-		with: [ spec repository: 'github://SeasideSt/Seaside:v3.4.7/repository' ];
-		baseline: 'Mapless'
-		with: [ spec 
-						repository: 'github://sebastianconcept/Mapless:v0.5.10/src';
-						loads: #('Core' 'Mongo' 'Memory' 'Mapless-Mongo-Log') ]
+		with: [ 
+			spec repository: 'github://SeasideSt/Seaside:v3.4.7/repository' ];
+		baseline: 'P3' with: [ spec repository: 'github://svenvc/P3' ]
 ]
 
 { #category : #baselines }
