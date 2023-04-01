@@ -194,13 +194,13 @@ IVDatabaseManager >> findAll: aModelClass where: aDictionary [
 { #category : #'as yet unclassified' }
 IVDatabaseManager >> readQuery: dbQuery [
 
-	^self readQuery: dbQuery onError: [ :ex | false ]
+	^self readQuery: dbQuery onError: [ :ex |  ]
 ]
 
 { #category : #'as yet unclassified' }
 IVDatabaseManager >> readQuery: dbQuery onError: aBlock [
 
-	^[ self dbClient isConnected ifFalse: [ self dbClient connect].
+	^[ [self dbClient isConnected ifFalse: [ self dbClient connect]] on: Error do:[dbClient := nil].
 		self dbClient query: dbQuery]
 	on: Error do: aBlock
 ]
